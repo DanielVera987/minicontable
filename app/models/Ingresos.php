@@ -1,7 +1,7 @@
 <?php
-namespace app\models;
+namespace App\Models;
 
-class Ingesos {
+class Ingresos {
   private $id;
   private $user_id;
   private $fecha;
@@ -14,4 +14,9 @@ class Ingesos {
   private $neto;
   private $created_at;
   private $updated_at;
+
+  public static function saludo()
+  {
+    return "Hola autoload";
+  }
 }
