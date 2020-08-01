@@ -2,7 +2,11 @@
 require_once 'vendor/autoload.php';
 require_once "config.php";
 
-use App\Models\Ingresos;
+if($_GET["accion"])
+{
+  if(file_exists('Controllers/'.$_GET['accion'].".php"))
+  {
+    
+  }
+}
 
-$saludo = Ingresos::saludo();
-var_dump($saludo);

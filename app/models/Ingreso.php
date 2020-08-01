@@ -14,9 +14,4 @@ class Ingresos {
   private $neto;
   private $created_at;
   private $updated_at;
-
-  public static function saludo()
-  {
-    return "Hola autoload";
-  }
 }
