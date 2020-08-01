@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Egresos {
+class Egreso {
   private $id;
   private $user_id;
   private $fecha;
