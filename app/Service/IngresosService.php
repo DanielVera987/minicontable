@@ -67,6 +67,38 @@ class IngresosService
   {
     $result = [];
 
-    return $result;
+    try {
+      $sql = $this->_db->prepare('SELECT * FROM ingresos WHERE id = :id');
+
+      $sql->execute(['id' => $id]);
+      $result = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
+
+      return $result;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
+  }
+
+  public function update(Ingreso $model)
+  {
+    try {
+      $sql = $this->_db->prepare('UPDATE ingresos SET fecha = :fecha, cliente = :cliente, concepto = :concepto, importe = :importe, iva = :iva, iva_ret = :iva_ret, isr_ret = :isr_ret, neto = :neto where id = :id');
+
+      $sql->execute([
+        'fecha' => $model->fecha,
+        'cliente' => $model->cliente,
+        'concepto' => $model->concepto,
+        'importe' => $model->importe,
+        'iva' => $model->iva,
+        'iva_ret' => $model->iva_ret,
+        'isr_ret' => $model->isr_ret,
+        'neto' => $model->neto,
+        'id' => $model->id
+      ]);
+
+      return 1;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
   }
 }
