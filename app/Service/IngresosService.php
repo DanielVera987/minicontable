@@ -101,4 +101,17 @@ class IngresosService
       return $error->getMessage();
     }
   }
+
+  public function destroy(int $id)
+  {
+    try {
+      $sql = $this->_db->prepare('DELETE FROM ingresos WHERE id = :id');
+    
+      $sql->execute(['id' => $id]);
+
+      return 1;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
+  }
 }
