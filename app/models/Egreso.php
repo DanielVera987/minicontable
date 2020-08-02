@@ -10,6 +10,4 @@ class Egreso {
   private $importe;
   private $iva;
   private $total;
-  private $created_at;
-  private $updated_at;
 }
