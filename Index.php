@@ -22,7 +22,7 @@ var_dump($getEgresos->all()); */
 /* $getEgreso = new EgresosService();
 var_dump($getEgreso->getId(1)); */
 
-$updateEgreso = new Egreso();
+/*$updateEgreso = new Egreso();
 $updateEgreso->fecha = date('Y-m-d');
 $updateEgreso->proveedor = "Daniel Vera";
 $updateEgreso->ieps = "12.00";
@@ -31,4 +31,7 @@ $updateEgreso->iva = "16.00";
 $updateEgreso->total = "10000.00";
 $update = new EgresosService();
 $a = $update->update($updateEgreso, 1);
-var_dump($a);
+var_dump($a); */
+
+$deleteEgreso = new EgresosService();
+$deleteEgreso->destroy(1);

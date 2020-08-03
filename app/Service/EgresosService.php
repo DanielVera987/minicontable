@@ -90,4 +90,14 @@ class EgresosService
       return $error;
     }
   }
+
+  public function destroy(int $id)
+  {
+    try {
+      $sql = $this->_bd->prepare("DELETE FROM egresos WHERE id = :id");
+      $sql->execute(["id" => $id]);
+    } catch (PDOException $error) {
+      return $error;
+    }
+  }
 }
