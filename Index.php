@@ -19,8 +19,8 @@ var_dump($create->create($createEgreso)); */
 /* $getEgresos = new EgresosService();
 var_dump($getEgresos->all()); */
 
-/* $getEgreso = new EgresosService();
-var_dump($getEgreso->getId(1)); */
+$getEgreso = new EgresosService();
+var_dump($getEgreso->getId(-1)); 
 
 /*$updateEgreso = new Egreso();
 $updateEgreso->fecha = date('Y-m-d');
@@ -33,5 +33,5 @@ $update = new EgresosService();
 $a = $update->update($updateEgreso, 1);
 var_dump($a); */
 
-$deleteEgreso = new EgresosService();
-$deleteEgreso->destroy(1);
+/* $deleteEgreso = new EgresosService();
+$deleteEgreso->destroy(1); */

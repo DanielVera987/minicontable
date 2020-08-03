@@ -34,6 +34,7 @@ class EgresosService
   public function create(Egreso $model)
   {
     try {
+
       $sql = $this->_bd->prepare('INSERT INTO egresos (user_id, fecha, proveedor, ieps, importe, iva, total, created_at, updated_at) VALUE (:user_id, :fecha, :proveedor, :ieps, :importe, :iva, :total, :created_at, :updated_at)');
 
       $sql->execute([
@@ -56,6 +57,7 @@ class EgresosService
 
   public function getId(int $id)
   {
+    if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
     $result = [];
 
     try {
