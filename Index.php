@@ -5,7 +5,7 @@ require_once "config.php";
 use App\Models\Egreso,
     App\Service\EgresosService;
 
-$createEgreso = new Egreso;
+/* $createEgreso = new Egreso;
 $createEgreso->user_id = 1;
 $createEgreso->fecha = date('Y-m-d');
 $createEgreso->proveedor = 'Sheila Vera';
@@ -14,4 +14,10 @@ $createEgreso->importe = 10.00;
 $createEgreso->iva = 16.00;
 $createEgreso->total = 200.00;
 $create = new EgresosService;
-var_dump($create->create($createEgreso));
+var_dump($create->create($createEgreso)); */
+
+/* $getEgresos = new EgresosService();
+var_dump($getEgresos->all()); */
+
+$getEgreso = new EgresosService();
+var_dump($getEgreso->getId(1));

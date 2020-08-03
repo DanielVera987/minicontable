@@ -53,4 +53,20 @@ class EgresosService
       return $error->getMessage();
     }
   }
+
+  public function getId(int $id)
+  {
+    $result = [];
+
+    try {
+      $sql = $this->_bd->prepare("SELECT * FROM egresos WHERE id = :id");
+      $sql->execute(["id" => $id]);
+
+      $result = $sql->fetchAll(PDO::FETCH_CLASS, "\\App\\Models\\Egreso");
+
+      return $result;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
+  }
 }
