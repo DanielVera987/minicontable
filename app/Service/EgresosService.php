@@ -69,4 +69,25 @@ class EgresosService
       return $error->getMessage();
     }
   }
+
+  public function update(Egreso $model, int $id)
+  {
+    try {
+      $sql = $this->_bd->prepare("UPDATE egresos SET fecha = :fecha, proveedor = :proveedor, ieps = :ieps, importe = :importe, iva = :iva, total = :total, updated_at = :updated_at");
+
+      $sql->execute([
+        'fecha' => $model->fecha,
+        'proveedor' => $model->proveedor,
+        'ieps' => $model->ieps,
+        'importe' => $model->importe,
+        'iva' => $model->iva,
+        'total' => $model->total,
+        'updated_at' => date('Y-m-d')
+      ]);
+
+      return 1;
+    } catch (PDOException $error) {
+      return $error;
+    }
+  }
 }
