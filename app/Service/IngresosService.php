@@ -29,11 +29,17 @@ class IngresosService
       $sql->execute();
 
       $result[] = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
-    } catch (PDOException $error) {
-      print 'Ocurrio un error al consultar';
-    }
 
-    return $result;
+      if(count($result) == 0){
+        $result = [
+          'error' => 'no hay egresos'
+        ];
+      }
+
+      return $result;
+    } catch (PDOException $error) {
+      return $error->getMessage(); 
+    }
   }
 
   public function create(Ingreso $model) : int
@@ -41,6 +47,7 @@ class IngresosService
     $result = [];
 
     try {
+      if(empty($model)) throw new PDOException("Verifique que sea de tipo Egreso");
       $sql = $this->_db->prepare('INSERT INTO ingresos (user_id, fecha, cliente, concepto, importe, iva, iva_ret, isr_ret, neto,created_at, updated_at) VALUES (:user_id, :fecha, :cliente, :concepto, :importe, :iva, :iva_ret, :isr_ret, :neto, :created_at, :update_at)');
 
       $sql->execute([
@@ -68,10 +75,17 @@ class IngresosService
     $result = [];
 
     try {
+      if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
       $sql = $this->_db->prepare('SELECT * FROM ingresos WHERE id = :id');
 
       $sql->execute(['id' => $id]);
       $result = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
+
+      if(count($result) == 0){
+        $result = [
+          'error' => 'no existe el egreso'
+        ];
+      }
 
       return $result;
     } catch (PDOException $error) {
@@ -82,6 +96,7 @@ class IngresosService
   public function update(Ingreso $model)
   {
     try {
+      if(empty($model)) throw new PDOException("Verifique que sea de tipo Egreso");
       $sql = $this->_db->prepare('UPDATE ingresos SET fecha = :fecha, cliente = :cliente, concepto = :concepto, importe = :importe, iva = :iva, iva_ret = :iva_ret, isr_ret = :isr_ret, neto = :neto where id = :id');
 
       $sql->execute([
@@ -105,6 +120,8 @@ class IngresosService
   public function destroy(int $id)
   {
     try {
+      if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
+
       $sql = $this->_db->prepare('DELETE FROM ingresos WHERE id = :id');
     
       $sql->execute(['id' => $id]);
