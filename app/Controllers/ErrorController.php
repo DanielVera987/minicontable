@@ -1,10 +1,10 @@
 <?php
 namespace App\Controllers;
 
-class DashboardController {
-
+class ErrorController
+{
   public static function index()
   {
-    echo "Bienvenido";
+    echo "404";
   }
 }
