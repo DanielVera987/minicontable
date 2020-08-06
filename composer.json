@@ -3,7 +3,8 @@
   "autoload": {
     "psr-4": {
       "App\\": "App/",
-      "Database\\": "Database/"
+      "Database\\": "Database/",
+      "Helpers\\": "Helpers/"
     }
   }
 }

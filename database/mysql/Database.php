@@ -12,9 +12,9 @@ class Database
     if(!self::$db)
     {
       $pdo = new PDO(
-        __CONFIG__["DB"]["HOST"],
-        __CONFIG__["DB"]["USER"],
-        __CONFIG__["DB"]["PASSWORD"]
+        __DB__["HOST"],
+        __DB__["USER"],
+        __DB__["PASSWORD"]
       );
 
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
