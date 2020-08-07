@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once 'vendor/autoload.php';
 require_once "config.php";
+require_once "view/layout/header.php";
 
 $nombreControlador = (isset($_GET['c'])) ? $_GET['c'] : false;
 $nombreMetodo = (isset($_GET['a'])) ? $_GET['a'] : false;
@@ -17,3 +18,5 @@ if($nombreMetodo && method_exists($nombreControlador,$nombreMetodo)){
 }else{
   ($nombreControlador) ? $nombreControlador::index() : '';
 }
+
+require_once "view/layout/footer.php";

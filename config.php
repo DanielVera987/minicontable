@@ -5,3 +5,4 @@ define("__DB__", [
   "USER" => "root",
   "PASSWORD" => "",
 ]);
+define("__URL__", "http://localhost/master_fullstack/minicontable/");
