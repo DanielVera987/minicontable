@@ -3,9 +3,7 @@ namespace App\Controllers;
 
 use App\Models\Ingreso,
     App\Service\IngresosService,
-    Helpers\Validator,
-    PDO,
-    PDOException;
+    Helpers\Validator;
 
 class IngresosController
 {

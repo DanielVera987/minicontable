@@ -2,6 +2,7 @@
 namespace Helpers;
 
 use App\Models\Ingreso;
+use App\Models\Egreso;
 use Exception;
 
 class Validator
@@ -21,6 +22,26 @@ class Validator
       if(!$model->iva_ret || !is_numeric($model->iva_ret)) throw new Exception("El concepto debe ser numero");
       if(!$model->isr_ret || !is_numeric($model->isr_ret)) throw new Exception("El concepto debe ser numero");
       if(!$model->neto || !is_numeric($model->neto)) throw new Exception("El concepto debe ser numero");
+
+      return 'exito';
+    } catch (Exception $th) {
+      return $th;
+    }
+  }
+
+  public static function ValidatorEgresoCreate(Egreso $model)
+  {
+    try {
+      if(!$model->id || !is_numeric($model->id)) throw new Exception("El id debe ser numero");
+      if(!$model->user_id || !is_numeric($model->user_id)) throw new Exception("El user_id debe ser numero");
+      if(!$model->fecha) throw new Exception("La fecha debe ser tipo Date");
+      $isValidFecha = self::validarFecha($model->fecha);
+      if(!$isValidFecha) throw new Exception("La fecha debe ser tipo Date");
+      if(!$model->proveedor) throw new Exception("Debe indicar el nombre del proveedor");
+      if(!$model->ieps || !is_numeric($model->ieps)) throw new Exception("El ieps debe ser numero");
+      if(!$model->importe || !is_numeric($model->importe)) throw new Exception("El concepto debe ser numero");
+      if(!$model->iva || !is_numeric($model->iva)) throw new Exception("El concepto debe ser numero");
+      if(!$model->total || !is_numeric($model->total)) throw new Exception("El total debe ser numero");
 
       return 'exito';
     } catch (Exception $th) {
