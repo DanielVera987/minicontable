@@ -28,7 +28,11 @@ class UserService
         "password" => $pwd
       ]);
 
-      return 1;
+      $usuario = $sql->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\User');
+
+      unset($usuario['password']);
+
+      return $usuario;
     } catch (Exception $th) {
       return $th->getMessage();
     }
