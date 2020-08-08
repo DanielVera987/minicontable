@@ -3,7 +3,10 @@ declare(strict_types=1);
 session_start();
 require_once 'vendor/autoload.php';
 require_once "config.php";
-require_once "view/layout/header.php";
+if(isset($_SESSION['Authorization']) && isset($_SESSION['id'])){
+  require_once "view/layout/header.php";
+}
+
 
 $nombreControlador = (isset($_GET['c'])) ? $_GET['c'] : false;
 $nombreMetodo = (isset($_GET['a'])) ? $_GET['a'] : false;
@@ -15,9 +18,11 @@ if($nombreControlador && file_exists("App/Controllers/{$nombreControlador}Contro
 }
 
 if($nombreMetodo && method_exists($nombreControlador,$nombreMetodo)){
-    $nombreControlador::$nombreMetodo();
+  $nombreControlador::$nombreMetodo();
 }else{
   ($nombreControlador) ? $nombreControlador::index() : '';
 }
 
-require_once "view/layout/footer.php";
+if(isset($_SESSION['Authorization']) && isset($_SESSION['id'])){
+  require_once "view/layout/footer.php";
+}

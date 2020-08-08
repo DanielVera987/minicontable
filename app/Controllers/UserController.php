@@ -10,7 +10,7 @@ class UserController {
   public static function index()
   {
     if(!isset($_SESSION['Authorization']) && !isset($_SESSION['id'])){
-      require_once "view/auth.php";
+      require_once "view/auth/auth.php";
     }else{
       header("Location: " . __URL__ . 'dashboard');
     }
