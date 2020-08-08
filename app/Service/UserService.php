@@ -5,6 +5,7 @@ use Database\Mysql\Database,
     App\Models\User,
     PDO,
     PDOException;
+use Exception;
 
 class UserService 
 {
@@ -20,9 +21,59 @@ class UserService
     $result = [];
 
     try {
-      //code
-    } catch (\Throwable $th) {
-      //throw $th;
+      $sql = $this->_bd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
+      $pwd = password_hash($user->password, PASSWORD_DEFAULT);
+      $sql->execute([
+        "email" => $user->email,
+        "password" => $pwd
+      ]);
+
+      return 1;
+    } catch (Exception $th) {
+      return $th->getMessage();
+    }
+  }
+
+  public function register(User $user)
+  {
+    try {
+      $sql = $this->_bd->prepare('INSERT INTO users (nombre, apellido, email, password, created_at, updated_at) VALUE (:nombre, :apellido, :email, :password, :created_at, :updated_at)');
+
+      $pwd = password_hash($user->password, PASSWORD_DEFAULT);
+
+      $sql->execute([
+        "nombre" => $user->nombre,
+        "apellido" => $user->apellido,
+        "email" => $user->email,
+        "password" => $pwd,
+        "created_at" => date('Y-m-d'),
+        "updated_at" => date('Y-m-d')
+      ]);
+
+      return 1;
+    } catch (Exception $th) {
+      return $th->getMessage();
+    }
+  }
+
+  public function update(User $user)
+  {
+    try {
+      $sql = $this->_bd->prepare('UPDATE users SET nombre = :nombre, apellido = :apellido, email = :email, password = :password, updated_at = :updated_at');
+
+      $pwd = password_hash($user->password, PASSWORD_DEFAULT);
+
+      $sql->execute([
+        "nombre" => $user->nombre,
+        "apellido" => $user->apellido,
+        "email" => $user->email,
+        "password" => $pwd,
+        "updated_at" => date('Y-m-d')
+      ]);
+
+      return 1;
+    } catch (Exception $th) {
+      return $th->getMessage();
     }
   }
 }
