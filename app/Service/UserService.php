@@ -29,7 +29,6 @@ class UserService
       ]);
 
       $usuario = $sql->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\User');
-
       unset($usuario['password']);
 
       return $usuario;
@@ -53,9 +52,11 @@ class UserService
         "created_at" => date('Y-m-d'),
         "updated_at" => date('Y-m-d')
       ]);
+      
+      $id = $this->_bd->lastInsertId();;
 
-      return 1;
-    } catch (Exception $th) {
+      return $id;
+    } catch (PDOException $th) {
       return $th->getMessage();
     }
   }

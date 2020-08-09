@@ -30,13 +30,13 @@
     <link href="view/auth/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form action="user/login" method="POST" class="form-signin">
+    <form action="<?= __URL__ ?>user/login" method="POST" class="form-signin">
       <img class="mb-4" src="assets/img/logo.png" alt="" width="60%">
       
       <h1 class="h3 mb-3 font-weight-normal">MiniContable</h1>
 
       <label for="email" class="sr-only">Email address</label>
-      <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+      <input type="email" id="email" name="email" class="form-control mb-2" placeholder="Email address" required autofocus>
 
       <label for="password" class="sr-only">Password</label>
       <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
@@ -44,6 +44,11 @@
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <div class="checkbox mb-2">
+        <label>
+          <a href="<?= __URL__ ?>user/register">Registrarse</a>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Inicar</button>
