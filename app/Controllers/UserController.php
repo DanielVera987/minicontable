@@ -2,10 +2,11 @@
 namespace App\Controllers;
 
 use App\Models\User,
-    App\Service\UserService;
+    App\Service\UserService,
+    Helpers\Controllers;
 use Exception;
 
-class UserController {
+class UserController extends Controllers{
 
   public static function index()
   {

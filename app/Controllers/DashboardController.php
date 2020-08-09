@@ -8,7 +8,7 @@ class DashboardController extends controllers{
   public static function index()
   {
     self::auth();
-    echo "Bienvenido";
+    require_once "view/dashboard/index.php";
   }
 
 }
