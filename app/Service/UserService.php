@@ -18,20 +18,20 @@ class UserService
 
   public function login(User $user)
   {
-    $result = [];
-
     try {
-      $sql = $this->_bd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
-      $pwd = password_hash($user->password, PASSWORD_DEFAULT);
+      $sql = $this->_bd->prepare('SELECT * FROM users WHERE email = :email');
       $sql->execute([
-        "email" => $user->email,
-        "password" => $pwd
+        "email" => $user->email
       ]);
+      $result = $sql->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\User');
 
-      $usuario = $sql->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\User');
-      unset($usuario['password']);
-
-      return $usuario;
+      $hash = $result[0]->password;
+      
+      if (password_verify($user->password, $hash)) {
+        return $result;
+      } else {
+        throw new Exception("Contraseña no valida");
+      }
     } catch (Exception $th) {
       return $th->getMessage();
     }

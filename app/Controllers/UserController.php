@@ -29,11 +29,18 @@ class UserController {
       $user->email = $email;
       $user->password = $password;
       $login = new UserService;
-      $verificar = $login->login($user);
+      $respuesta = $login->login($user);
 
+      if(!is_array($respuesta)) throw new Exception("Contraseña invalida"); 
 
+      $_SESSION["Authorization"] = true;
+      $_SESSION['id'] = $respuesta[0]->id; 
+      header("Location: " . __URL__ . "dashboard");
+      exit;
     } catch (Exception $th) {
-      echo $th->getMessage();
+      $_SESSION['error'] = $th->getMessage();
+      header("Location: " . __URL__ . "user");
+      exit;
     }
     
   }
@@ -71,10 +78,12 @@ class UserController {
         $_SESSION["Authorization"] = true;
         $_SESSION['id'] = $respuesta; 
 
-        header("Location: " . __URL__ . 'dashboard');
+        header("Location: " . __URL__ . "dashboard");
+        exit;
       }
       
-      header("Location: " . __URL__ . 'user/register');
+      header("Location: " . __URL__ . "user/register");
+      exit;
     } catch (Exception $th) {
       $_SESSION['error'] = $th->getMessage();
     }

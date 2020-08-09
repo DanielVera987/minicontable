@@ -31,9 +31,16 @@
   </head>
   <body class="text-center">
     <form action="<?= __URL__ ?>user/login" method="POST" class="form-signin">
-      <img class="mb-4" src="assets/img/logo.png" alt="" width="60%">
+      <img class="mb-4" src="assets/img/logo.png" alt="" width="30%">
       
       <h1 class="h3 mb-3 font-weight-normal">MiniContable</h1>
+
+      <?php if(isset($_SESSION['error'])): ?> 
+        <div class="alert alert-danger" role="alert">
+          <strong><?= $_SESSION['error'] ?></strong>
+          <?php unset($_SESSION['error']); ?>
+        </div>
+      <?php endif; ?> 
 
       <label for="email" class="sr-only">Email address</label>
       <input type="email" id="email" name="email" class="form-control mb-2" placeholder="Email address" required autofocus>

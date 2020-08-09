@@ -5,6 +5,7 @@ class DashboardController {
 
   public static function index()
   {
+    session_destroy();
     echo "Bienvenido";
   }
 }
