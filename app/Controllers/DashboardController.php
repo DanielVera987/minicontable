@@ -1,11 +1,14 @@
 <?php
 namespace App\Controllers;
 
-class DashboardController {
+use Helpers\controllers;
+
+class DashboardController extends controllers{
 
   public static function index()
   {
-    session_destroy();
+    self::auth();
     echo "Bienvenido";
   }
+
 }
