@@ -16,6 +16,11 @@ class IngresosController
 
   public static function create()
   {
+    require_once 'view/ingresos/create.php';
+  }
+
+  public static function created()
+  {
     $newIngreso = new Ingreso();
     $newIngreso->id = (isset($_POST['id'])) ? $_POST['id'] : false ;
     $newIngreso->user_id = (isset($_POST['user_id'])) ? $_POST['user_id'] : false ;

@@ -16,6 +16,11 @@ class EgresosController
 
   public static function create()
   {
+    require_once 'view/egresos/create.php';
+  }
+
+  public static function created()
+  {
     $newEgreso = new Egreso();
     $newEgreso = new Egreso();
     $newEgreso->id = (isset($_POST['id'])) ? $_POST['id'] : false ;
