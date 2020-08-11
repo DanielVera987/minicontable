@@ -85,8 +85,7 @@ class IngresosController
 
     $getById = new IngresosService;
     $ingreso = $getById->destroy($id);
-
-    var_dump($ingreso);
-    //require_once 'view/ingresos/show.php';
+    
+    header("Location: " . __URL__ . "ingresos");
   }
 }

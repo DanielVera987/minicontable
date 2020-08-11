@@ -18,9 +18,9 @@
             <th>#</th>
             <th>Cliente</th>
             <th>Fecha</th>
-            <th>Proveedor</th>
+            <th>Concepto</th>
             <th>Importe</th>
-            <th>#</th>
+            <th>Administrar</th>
           </tr>
         </thead>
         <tbody>
@@ -29,14 +29,19 @@
               <td colspan="6" class="text-center"><?= $ingresos['error'] ?></td>
             </tr>
           <?php else: ?>
+            <?php foreach($ingresos as $ingreso): ?>
             <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
-            <td>#</td>
-          </tr>
+              <td><?= $ingreso['id'] ?></td>
+              <td><?= $ingreso['cliente'] ?></td>
+              <td><?= $ingreso['fecha'] ?></td>
+              <td><?= $ingreso['concepto'] ?></td>
+              <td><?= $ingreso['importe'] ?></td>
+              <td>
+                <a href="<?= __URL__ ?>ingresos/update/<?= $ingreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
+                <a href="<?= __URL__ ?>ingresos/destroy/<?= $ingreso['id'] ?>" type="button" class="btn btn-sm btn-danger">Eliminar</a>
+              </td>
+            </tr>
+            <?php endforeach; ?>
           <?php endif; ?>
         </tbody>
       </table>

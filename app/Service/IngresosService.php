@@ -22,14 +22,13 @@ class IngresosService
 
   public function all() : Array
   {
-    $result = [];
-
     try {
       $sql =  $this->_db->prepare("select * from ingresos");
       $sql->execute();
 
-      $result[] = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
-
+      $obj = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
+      $result = json_decode(json_encode($obj), true); 
+      
       if(count($result) == 0){
         $result = [
           'error' => 'no hay egresos'

@@ -29,14 +29,19 @@
               <td colspan="6" class="text-center"><?= $egresos['error'] ?></td>
             </tr>
           <?php else: ?>
-            <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
-            <td>#</td>
-          </tr>
+            <?php foreach($egresos as $egreso): ?>
+              <tr>
+                <td><?= $egreso['id'] ?></td>
+                <td><?= $egreso['cliente'] ?></td>
+                <td><?= $egreso['fecha'] ?></td>
+                <td><?= $egreso['concepto'] ?></td>
+                <td><?= $egreso['importe'] ?></td>
+                <td>
+                  <a href="<?= __URL__ ?>egreso/update/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="<?= __URL__ ?>egreso/destroy/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
           <?php endif; ?>
         </tbody>
       </table>

@@ -23,7 +23,8 @@ class EgresosService
       $sql = $this->_bd->prepare('SELECT * FROM egresos');
       $sql->execute();
 
-      $result = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Egreso');
+      $obj = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Egreso');
+      $result = json_decode(json_encode($obj), true); 
 
       if(count($result) == 0){
         $result = [
