@@ -74,7 +74,7 @@ class IngresosController extends Controllers
     $getById = new IngresosService;
     $ingreso = $getById->getId($id);
 
-    require_once 'view/ingresos/create.php';
+    require_once 'view/ingresos/update.php';
   }
 
   public static function update()
