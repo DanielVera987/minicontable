@@ -53,7 +53,7 @@ class UserService
         "updated_at" => date('Y-m-d')
       ]);
       
-      $id = $this->_bd->lastInsertId();;
+      $id = $this->_bd->lastInsertId();
 
       return $id;
     } catch (PDOException $th) {

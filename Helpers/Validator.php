@@ -11,11 +11,10 @@ class Validator
   public static function ValidatorIngresoCreate(Ingreso $model)
   {
     try {
-      if(!$model->id || !is_numeric($model->id)) throw new Exception("El id debe ser numero");
       if(!$model->user_id || !is_numeric($model->user_id)) throw new Exception("El user_id debe ser numero");
       if(!$model->fecha) throw new Exception("La fecha debe ser tipo Date");
       $isValidFecha = self::validarFecha($model->fecha);
-      if(!$isValidFecha) throw new Exception("La fecha debe ser tipo Date");
+      if(!$isValidFecha) throw new Exception("La fecha debe ser tipo Date2");
       if(!$model->cliente) throw new Exception("Debe indicar el nombre del cliente");
       if(!$model->importe || !is_numeric($model->importe)) throw new Exception("El concepto debe ser numero");
       if(!$model->iva || !is_numeric($model->iva)) throw new Exception("El concepto debe ser numero");
@@ -25,7 +24,7 @@ class Validator
 
       return 'exito';
     } catch (Exception $th) {
-      return $th;
+      return $th->getMessage();
     }
   }
 
@@ -50,8 +49,8 @@ class Validator
   }
 
   public static function validarFecha($fecha){
-    $valores = explode('/', $fecha);
-    if(count($valores) == 3 && checkdate($valores[1], $valores[0], $valores[2])){
+    $valores = explode('-', $fecha);
+    if(count($valores) == 3 && checkdate($valores[1], $valores[2], $valores[0])){
       return true;
       }
     return false;

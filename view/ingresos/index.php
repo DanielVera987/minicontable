@@ -33,7 +33,7 @@
                 <td><?= $ingreso['concepto'] ?></td>
                 <td><?= $ingreso['importe'] ?></td>
                 <td>
-                  <a href="<?= __URL__ ?>ingresos/update/<?= $ingreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="<?= __URL__ ?>ingresos/show/<?= $ingreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
                   <a href="<?= __URL__ ?>ingresos/destroy/<?= $ingreso['id'] ?>" type="button" class="btn btn-sm btn-danger">Eliminar</a>
                 </td>
               </tr>

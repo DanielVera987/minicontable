@@ -43,15 +43,13 @@ class IngresosService
 
   public function create(Ingreso $model) : int
   {
-    $result = [];
-
     try {
       if(empty($model)) throw new PDOException("Verifique que sea de tipo Egreso");
       $sql = $this->_db->prepare('INSERT INTO ingresos (user_id, fecha, cliente, concepto, importe, iva, iva_ret, isr_ret, neto,created_at, updated_at) VALUES (:user_id, :fecha, :cliente, :concepto, :importe, :iva, :iva_ret, :isr_ret, :neto, :created_at, :update_at)');
 
       $sql->execute([
-        'user_id' => '1',
-        'fecha' => date('Y-m-d'),
+        'user_id' => $model->user_id,
+        'fecha' => $model->fecha,
         'cliente' => $model->cliente,
         'concepto' => $model->concepto,
         'importe' => $model->importe,
@@ -59,11 +57,13 @@ class IngresosService
         'iva_ret' => $model->iva_ret,
         'isr_ret' => $model->isr_ret,
         'neto' => $model->neto,
-        'created_at' => date('Y-m-d'),
-        'update_at' => date('Y-m-d')
+        'created_at' => $model->fecha,
+        'update_at' => $model->fecha
       ]);
+      
+      $id = $this->_db->lastInsertId();
 
-      return 1;
+      return $id;
     } catch (PDOException $error) {
       return $error->getMessage();
     }
@@ -71,14 +71,13 @@ class IngresosService
 
   public function getId(int $id) : Array 
   {
-    $result = [];
-
     try {
       if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
       $sql = $this->_db->prepare('SELECT * FROM ingresos WHERE id = :id');
 
       $sql->execute(['id' => $id]);
-      $result = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
+      $obj = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Ingreso');
+      $result = json_decode(json_encode($obj), true); 
 
       if(count($result) == 0){
         $result = [
