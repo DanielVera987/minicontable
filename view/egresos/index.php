@@ -7,14 +7,28 @@
         </div>
       </div>
     </div>
+
+    <?php if(isset($_SESSION['error'])): ?> 
+      <div class="alert alert-danger" role="alert">
+        <strong><?= $_SESSION['error'] ?></strong>
+        <?php unset($_SESSION['error']); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['success'])): ?> 
+      <div class="alert alert-success" role="alert">
+        <strong><?= $_SESSION['success'] ?></strong>
+        <?php unset($_SESSION['success']); ?>
+      </div>
+    <?php endif; ?>
+    
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
             <th>#</th>
-            <th>Cliente</th>
-            <th>Fecha</th>
             <th>Proveedor</th>
+            <th>Fecha</th>
             <th>Importe</th>
             <th>#</th>
           </tr>
@@ -28,13 +42,12 @@
             <?php foreach($egresos as $egreso): ?>
               <tr>
                 <td><?= $egreso['id'] ?></td>
-                <td><?= $egreso['cliente'] ?></td>
+                <td><?= $egreso['proveedor'] ?></td>
                 <td><?= $egreso['fecha'] ?></td>
-                <td><?= $egreso['concepto'] ?></td>
-                <td><?= $egreso['importe'] ?></td>
+                <td><?= $egreso['total'] ?></td>
                 <td>
-                  <a href="<?= __URL__ ?>egreso/update/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
-                  <a href="<?= __URL__ ?>egreso/destroy/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-danger">Eliminar</a>
+                  <a href="<?= __URL__ ?>egresos/show/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="<?= __URL__ ?>egresos/destroy/<?= $egreso['id'] ?>" type="button" class="btn btn-sm btn-danger">Eliminar</a>
                 </td>
               </tr>
             <?php endforeach; ?>

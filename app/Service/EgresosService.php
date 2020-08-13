@@ -72,7 +72,8 @@ class EgresosService
       $sql = $this->_bd->prepare("SELECT * FROM egresos WHERE id = :id");
       $sql->execute(["id" => $id]);
 
-      $result = $sql->fetchAll(PDO::FETCH_CLASS, "\\App\\Models\\Egreso");
+      $obj = $sql->fetchAll(PDO::FETCH_CLASS, "\\App\\Models\\Egreso");
+      $result = json_decode(json_encode($obj), true); 
 
       if(count($result) == 0){
         $result = [
@@ -91,7 +92,7 @@ class EgresosService
       if(empty($model)) throw new PDOException("Verifique que sea de tipo Egreso");
       if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
 
-      $sql = $this->_bd->prepare("UPDATE egresos SET fecha = :fecha, proveedor = :proveedor, ieps = :ieps, importe = :importe, iva = :iva, total = :total, updated_at = :updated_at");
+      $sql = $this->_bd->prepare("UPDATE egresos SET fecha = :fecha, proveedor = :proveedor, ieps = :ieps, importe = :importe, iva = :iva, total = :total, updated_at = :updated_at WHERE id=:id");
 
       $sql->execute([
         'fecha' => $model->fecha,
@@ -100,12 +101,13 @@ class EgresosService
         'importe' => $model->importe,
         'iva' => $model->iva,
         'total' => $model->total,
-        'updated_at' => date('Y-m-d')
+        'updated_at' => date('Y-m-d'),
+        'id' => $id
       ]);
 
       return 1;
     } catch (PDOException $error) {
-      return $error;
+      return $error->getMessage();
     }
   }
 
@@ -119,7 +121,7 @@ class EgresosService
 
       return 1;
     } catch (PDOException $error) {
-      return $error;
+      return $error->getMessage();
     }
   }
 }
