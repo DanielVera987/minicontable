@@ -17,6 +17,7 @@
           </div>
         <?php endif; ?> 
       <?php foreach($ingreso as $ingre): ?>
+        <input type="hidden" class="form-control" name="id" id="id" value="<?= $_GET['id'] ?>" placeholder="">
         <div class="form-group row">
           <label for="cliente" class="col-md-1 col-form-label">Cliente</label>
           <div class="col-md-6">

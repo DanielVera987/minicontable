@@ -79,29 +79,38 @@ class IngresosController extends Controllers
 
   public static function update()
   {
-    self::auth();
-    $newIngreso = new Ingreso();
-    $newIngreso->id = (isset($_POST['id'])) ? $_POST['id'] : false ;
-    $newIngreso->user_id = (isset($_POST['user_id'])) ? $_POST['user_id'] : false ;
-    $newIngreso->fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : false ;
-    $newIngreso->cliente = (isset($_POST['cliente'])) ? $_POST['cliente'] : false ;
-    $newIngreso->concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : false ;
-    $newIngreso->importe = (isset($_POST['importe'])) ? $_POST['importe'] : false ;
-    $newIngreso->iva = (isset($_POST['iva'])) ? $_POST['iva'] : false ;
-    $newIngreso->iva_ret = (isset($_POST['iva_ret'])) ? $_POST['iva_ret'] : false ;
-    $newIngreso->isr_ret = (isset($_POST['isr_ret'])) ? $_POST['isr_ret'] : false ;
-    $newIngreso->neto = (isset($_POST['neto'])) ? $_POST['neto'] : false ;
+      self::auth();
+      $id = $_POST['id'];
+      $newIngreso = new Ingreso();
+      $newIngreso->id = (isset($_POST['id'])) ? $_POST['id'] : false ;
+      $newIngreso->user_id = (isset($_SESSION['id'])) ? $_SESSION['id'] : false ;
+      $newIngreso->fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : false ;
+      $newIngreso->cliente = (isset($_POST['cliente'])) ? $_POST['cliente'] : false ;
+      $newIngreso->concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : false ;
+      $newIngreso->importe = (isset($_POST['importe'])) ? $_POST['importe'] : false ;
+      $newIngreso->iva = (isset($_POST['iva'])) ? $_POST['iva'] : false ;
+      $newIngreso->iva_ret = (isset($_POST['iva_ret'])) ? $_POST['iva_ret'] : false ;
+      $newIngreso->isr_ret = (isset($_POST['isr_ret'])) ? $_POST['isr_ret'] : false ;
+      $newIngreso->neto = (isset($_POST['neto'])) ? $_POST['neto'] : false ;
 
-    $validator = Validator::ValidatorIngresoCreate($newIngreso);
+      $validator = Validator::ValidatorIngresoCreate($newIngreso);
 
-    if($validator != 'exito') var_dump($validator);
+      if($validator != 'exito'){
+        $_SESSION['error'] = $validator;
+        throw new Exception($validator);
+      }
 
-    $crearIngreso = new IngresosService;
-    $crearIngreso->update($newIngreso);
+      $crearIngreso = new IngresosService;
+      $respuesta = $crearIngreso->update($newIngreso);
 
-    if($crearIngreso != 1) var_dump($crearIngreso);
+      if(!is_numeric($respuesta)){
+        $_SESSION['error'] = $respuesta;
+        throw new Exception($respuesta);
+      }else{
+        $_SESSION['success'] = "Ingreso Creado";
+      }
 
-    require_once 'view/ingresos/create.php';
+    header('Location:' . __URL__ . 'ingresos/show/' . $id);
   }
 
   public static function destroy()
