@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante total="10653.03" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" LugarExpedicion="TORREON COAHUILA" TipoCambio="1.0000" fecha="2014-02-05T20:35:01" sello="SPSDsyDAKDBA4RD3XEUubZFLEK4KWPzlhYUpByU6Yt/B0dU7FT0MSfzV7BO2l6EpAoO1ielS6PRJtffNFAmHqokCTrb4Rg4iLXRxNz2AGki8XmUsMtgKaUGdUJ/kTsa/xeppOVt5ZA2fCl5ecOZctEQPoHNupC6DrVRO1lMZsdk=" Moneda="MXN" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" metodoDePago="NO IDENTIFICADO" noCertificado="20001000000100005867" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3                                   http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd                                   http://www.sat.gob.mx/TimbreFiscalDigital                                   http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigital.xsd http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigital.xsd" certificado="MIIEdDCCA1ygAwIBAgIUMjAwMDEwMDAwMDAxMDAwMDU4NjcwDQYJKoZIhvcNAQEFBQAwggFvMRgwFgYDVQQDDA9BLkMuIGRlIHBydWViYXMxLzAtBgNVBAoMJlNlcnZpY2lvIGRlIEFkbWluaXN0cmFjacOzbiBUcmlidXRhcmlhMTgwNgYDVQQLDC9BZG1pbmlzdHJhY2nDs24gZGUgU2VndXJpZGFkIGRlIGxhIEluZm9ybWFjacOzbjEpMCcGCSqGSIb3DQEJARYaYXNpc25ldEBwcnVlYmFzLnNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxEjAQBgNVBAcMCUNveW9hY8OhbjEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTIwMAYJKoZIhvcNAQkCDCNSZXNwb25zYWJsZTogSMOpY3RvciBPcm5lbGFzIEFyY2lnYTAeFw0xMjA3MjcxNzAyMDBaFw0xNjA3MjcxNzAyMDBaMIHbMSkwJwYDVQQDEyBBQ0NFTSBTRVJWSUNJT1MgRU1QUkVTQVJJQUxFUyBTQzEpMCcGA1UEKRMgQUNDRU0gU0VSVklDSU9TIEVNUFJFU0FSSUFMRVMgU0MxKTAnBgNVBAoTIEFDQ0VNIFNFUlZJQ0lPUyBFTVBSRVNBUklBTEVTIFNDMSUwIwYDVQQtExxBQUEwMTAxMDFBQUEgLyBIRUdUNzYxMDAzNFMyMR4wHAYDVQQFExUgLyBIRUdUNzYxMDAzTURGUk5OMDkxETAPBgNVBAsTCFVuaWRhZCAxMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2TTQSPONBOVxpXv9wLYo8jezBrb34i/tLx8jGdtyy27BcesOav2c1NS/Gdv10u9SkWtwdy34uRAVe7H0a3VMRLHAkvp2qMCHaZc4T8k47Jtb9wrOEh/XFS8LgT4y5OQYo6civfXXdlvxWU/gdM/e6I2lg6FGorP8H4GPAJ/qCNwIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQUFAAOCAQEATxMecTpMbdhSHo6KVUg4QVF4Op2IBhiMaOrtrXBdJgzGotUFcJgdBCMjtTZXSlq1S4DG1jr8p4NzQlzxsdTxaB8nSKJ4KEMgIT7E62xRUj15jI49qFz7f2uMttZLNThipunsN/NF1XtvESMTDwQFvas/Ugig6qwEfSZc0MDxMpKLEkEePmQwtZD+zXFSMVa6hmOu4M+FzGiRXbj4YJXn9Myjd8xbL/c+9UIcrYoZskxDvMxc6/6M3rNNDY3OFhBK+V/sPMzWWGt8S1yjmtPfXgFs1t65AZ2hcTwTAuHrKwDatJ1ZPfa482ZBROAAX1waz7WwXp0gso7sDCm2/yUVww==" version="3.2" serie="H" descuento="0.00" folio="10" subTotal="11174.94" tipoDeComprobante="ingreso" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" formaDePago="PAGO EN UNA SOLA EXHIBICION">
+<cfdi:Emisor nombre="MIGUEL ANGEL SOSA HERNANDEZ" rfc="AAA010101AAA">
+<cfdi:DomicilioFiscal codigoPostal="27054" localidad="TORREON" noExterior="516" estado="COAHUILA" pais="MEXICO" municipio="TORREON" colonia="VALLE VERDE" calle="SALTILLO"/>
+<cfdi:ExpedidoEn codigoPostal="27054" localidad="TORREON" noExterior="516" estado="COAHUILA" pais="MEXICO" municipio="TORREON" colonia="VALLE VERDE" calle="SALTILLO"/>
+<cfdi:RegimenFiscal Regimen="Regimen Intermedio de las Personas Fisicas con Actividades Empresariales"/>
+</cfdi:Emisor>
+<cfdi:Receptor nombre="VENTA A PUBLICO EN GENERAL" rfc="XAXX010101000"/>
+<cfdi:Conceptos>
+<cfdi:Concepto importe="11174.94" valorUnitario="1064.28" cantidad="10.5" descripcion="DEMO SERVICIO MANTENIMIENTO" unidad="NO APLICA" noIdentificacion="2G46515"/>
+</cfdi:Conceptos>
+<cfdi:Impuestos totalImpuestosTrasladados="1787.94" totalImpuestosRetenidos="2309.85">
+<cfdi:Retenciones>
+<cfdi:Retencion importe="1192.36" impuesto="IVA"/>
+<cfdi:Retencion importe="1117.49" impuesto="ISR"/>
+</cfdi:Retenciones>
+<cfdi:Traslados>
+<cfdi:Traslado importe="1787.94" tasa="16.00" impuesto="IVA"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<tfd:TimbreFiscalDigital version="1.0" UUID="107DC41C-6353-4A4A-A5FD-8EC7EE162490" FechaTimbrado="2014-02-05T20:39:37" selloCFD="SPSDsyDAKDBA4RD3XEUubZFLEK4KWPzlhYUpByU6Yt/B0dU7FT0MSfzV7BO2l6EpAoO1ielS6PRJtffNFAmHqokCTrb4Rg4iLXRxNz2AGki8XmUsMtgKaUGdUJ/kTsa/xeppOVt5ZA2fCl5ecOZctEQPoHNupC6DrVRO1lMZsdk=" noCertificadoSAT="20001000000100005761" selloSAT="vj3grlFbiWP9WCn4IwNhIGGLSHRuuZJfBFVbeJyhSyBGEZo0JrJuNrzq4qidQTEbcAjn88ND6WjwZmRKryYcqmhzPZaX5jKOoUqJ3C9QQgOk9WvP8/U42R1g94e/uSsVX1wJ2gwq73DHyDfLSLrS9dBEc3f1bj9GUcJTASYetL0="/>
+</cfdi:Complemento>
+</cfdi:Comprobante>

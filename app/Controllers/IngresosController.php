@@ -4,8 +4,9 @@ namespace App\Controllers;
 use App\Models\Ingreso,
     App\Service\IngresosService,
     Helpers\Validator,
-    Helpers\Controllers;
-use Exception;
+    Helpers\Controllers,
+    Helpers\Cfdi,
+    Exception;
 
 class IngresosController extends Controllers
 {
@@ -123,5 +124,10 @@ class IngresosController extends Controllers
     $ingreso = $getById->destroy($id);
     
     header("Location: " . __URL__ . "ingresos");
+  }
+
+  public static function importar()
+  {
+    return Cfdi::importCfdi3('file.xml');
   }
 }
