@@ -128,6 +128,6 @@ class IngresosController extends Controllers
 
   public static function importar()
   {
-    return Cfdi::importCfdi3('file.xml');
+    return Cfdi::importCfdi3('file3.xml');
   }
 }
