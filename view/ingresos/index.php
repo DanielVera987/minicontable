@@ -3,7 +3,7 @@
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
           <a href="<?= __URL__ ?>ingresos/create" type="button" class="btn btn-sm btn-outline-secondary">Nuevo Ingreso</a>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Exportar XML</button>
+          <a href="<?= __URL__ ?>ingresos/importar" class="btn btn-sm btn-outline-secondary">Importar XML</a>
         </div>
       </div>
     </div>
