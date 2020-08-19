@@ -62,7 +62,7 @@ class IngresosService
       ]);
       
       $id = $this->_db->lastInsertId();
-
+      
       return $id;
     } catch (PDOException $error) {
       return $error->getMessage();

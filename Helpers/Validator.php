@@ -17,10 +17,10 @@ class Validator
       if(!$isValidFecha) throw new Exception("La fecha debe ser tipo Date2");
       if(!$model->cliente) throw new Exception("Debe indicar el nombre del cliente");
       if(!$model->importe || !is_numeric($model->importe)) throw new Exception("El concepto debe ser numero");
-      if(!$model->iva || !is_numeric($model->iva)) throw new Exception("El concepto debe ser numero");
-      if(!$model->iva_ret || !is_numeric($model->iva_ret)) throw new Exception("El concepto debe ser numero");
-      if(!$model->isr_ret || !is_numeric($model->isr_ret)) throw new Exception("El concepto debe ser numero");
-      if(!$model->neto || !is_numeric($model->neto)) throw new Exception("El concepto debe ser numero");
+      if(!$model->iva || !is_numeric($model->iva)) throw new Exception("El iva debe ser numero");
+      if(!$model->iva_ret || !is_numeric($model->iva_ret)) throw new Exception("El iva retenido debe ser numero");
+      if(!$model->isr_ret || !is_numeric($model->isr_ret)) throw new Exception("El isr retenido debe ser numero");
+      if(!$model->neto || !is_numeric($model->neto)) throw new Exception("El neto debe ser numero");
 
       return 'exito';
     } catch (Exception $th) {

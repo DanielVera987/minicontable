@@ -32,25 +32,10 @@ class Cfdi
       $result['emisorNombre'] = strval($Emisor['Nombre']);
     } 
 
-          /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor//cfdi:DomicilioFiscal') as $DomicilioFiscal){ 
-            echo "Domicilio Fiscal";
-            var_dump($DomicilioFiscal);
-          }  */
-
-          /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor//cfdi:ExpedidoEn') as $ExpedidoEn){ 
-            echo "Expedido en";
-            var_dump($ExpedidoEn);
-          }  */
-
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){ 
       $result['receptorRfc'] = strval($Receptor['Rfc']);
       $result['receptorNombre'] = strval($Receptor['Nombre']);
     } 
-
-        /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor//cfdi:Domicilio') as $ReceptorDomicilio){ 
-          echo "Domicilio";
-          var_dump($ReceptorDomicilio);
-        }  */
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto') as $Concepto){ 
       $result['concepto'] = [
@@ -70,13 +55,6 @@ class Cfdi
 
     return $result;
     
-        /* if(isset($ns['tfd']))
-        {
-          foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
-            echo "tfd";
-            var_dump($tfd);
-          } 
-        } */
   }
 
   public static function importCfdiPago()

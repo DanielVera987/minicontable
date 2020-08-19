@@ -137,11 +137,11 @@ class IngresosController extends Controllers
       $newIngreso->user_id = (isset($_SESSION['id'])) ? $_SESSION['id'] : false ;
       $newIngreso->fecha = $fecha[0];
       $newIngreso->cliente = $result['receptorNombre'];
-      $newIngreso->concepto = intVal($result['concepto']['Importe']);
-      $newIngreso->importe = intVal($result['concepto']['Importe']);
+      $newIngreso->concepto = (int)intVal($result['concepto']['Importe']);
+      $newIngreso->importe = (int)intVal($result['concepto']['Importe']);
       $newIngreso->iva = intVal($result['traslado']['Importe']);
-      $newIngreso->iva_ret = '';
-      $newIngreso->isr_ret = '';
+      $newIngreso->iva_ret = 1;
+      $newIngreso->isr_ret = 1;
       $newIngreso->neto = intVal($result['total']);
       
 
@@ -154,6 +154,8 @@ class IngresosController extends Controllers
 
       $crearIngreso = new IngresosService;
       $respuesta = $crearIngreso->create($newIngreso);
+
+      //Crear los items
 
       if(!is_numeric($respuesta)){
         $_SESSION['error'] = $respuesta;
