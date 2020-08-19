@@ -128,6 +128,44 @@ class IngresosController extends Controllers
 
   public static function importar()
   {
-    return Cfdi::importCfdi3('file3.xml');
+    try {
+      self::auth();
+      $result = Cfdi::importCfdi3('file3.xml');
+      $fecha = explode("T", $result['fecha']);
+      
+      $newIngreso = new Ingreso();
+      $newIngreso->user_id = (isset($_SESSION['id'])) ? $_SESSION['id'] : false ;
+      $newIngreso->fecha = $fecha[0];
+      $newIngreso->cliente = $result['receptorNombre'];
+      $newIngreso->concepto = intVal($result['concepto']['Importe']);
+      $newIngreso->importe = intVal($result['concepto']['Importe']);
+      $newIngreso->iva = intVal($result['traslado']['Importe']);
+      $newIngreso->iva_ret = '';
+      $newIngreso->isr_ret = '';
+      $newIngreso->neto = intVal($result['total']);
+      
+
+      $validator = Validator::ValidatorIngresoCreate($newIngreso);
+
+      if($validator != 'exito'){
+        $_SESSION['error'] = $validator;
+        throw new Exception($validator);
+      } 
+
+      $crearIngreso = new IngresosService;
+      $respuesta = $crearIngreso->create($newIngreso);
+
+      if(!is_numeric($respuesta)){
+        $_SESSION['error'] = $respuesta;
+        throw new Exception($respuesta);
+      }else{
+        $_SESSION['success'] = "Ingreso Creado";
+      }
+
+    } catch (Exception $th) {
+      //throw $th;
+    }
+
+    header('Location:' . __URL__ . 'ingresos/create');
   }
 }

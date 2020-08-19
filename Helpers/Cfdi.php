@@ -10,6 +10,7 @@ class Cfdi
 {
   public static function importCfdi3($file = '')
   {
+    $result = [];
     $xml = simplexml_load_file($file); 
     $ns = $xml->getNamespaces(true);
     $xml->registerXPathNamespace('c', $ns['cfdi']);
@@ -19,24 +20,16 @@ class Cfdi
     }
     
     foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){ 
-      echo "Comprobante";
-      var_dump($cfdiComprobante);
-      /*
-      Fecha
-      Subtotal
-      Total
-      Tipo de comprobante
-      Metodo de pago
-      */
+      $result['fecha'] = strval($cfdiComprobante['Fecha']);
+      $result['subtotal'] = strval($cfdiComprobante['SubTotal']);
+      $result['total'] = strval($cfdiComprobante['Total']);
+      $result['tipodecomprobante'] = strval($cfdiComprobante['TipoDeComprobante']);
+      $result['metodopago'] = strval($cfdiComprobante['MetodoPago']);
     } 
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor') as $Emisor){ 
-      echo "Emisor";
-      var_dump($Emisor);
-      /*
-      RFC
-      Nombre
-      */
+      $result['emisorRfc'] = strval($Emisor['Rfc']);
+      $result['emisorNombre'] = strval($Emisor['Nombre']);
     } 
 
           /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor//cfdi:DomicilioFiscal') as $DomicilioFiscal){ 
@@ -50,46 +43,40 @@ class Cfdi
           }  */
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){ 
-      echo "Receptor";
-      var_dump($Receptor);
-      /*
-      Rfc
-      Nombre
-      */
+      $result['receptorRfc'] = strval($Receptor['Rfc']);
+      $result['receptorNombre'] = strval($Receptor['Nombre']);
     } 
 
-    /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor//cfdi:Domicilio') as $ReceptorDomicilio){ 
-      echo "Domicilio";
-      var_dump($ReceptorDomicilio);
-    }  */
+        /* foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor//cfdi:Domicilio') as $ReceptorDomicilio){ 
+          echo "Domicilio";
+          var_dump($ReceptorDomicilio);
+        }  */
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto') as $Concepto){ 
-      echo "Concepto";
-      var_dump($Concepto);
-      /*
-      Cantidad
-      Descripcion
-      ValorUnitario
-      Importe
-      */
+      $result['concepto'] = [
+        'Cantidad' => strval($Concepto['Cantidad']),
+        'Descripcion' => strval($Concepto['Descripcion']),
+        'ValorUnitario' => strval($Concepto['ValorUnitario']),
+        'Importe' => strval($Concepto['Importe'])
+      ];
     } 
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Impuestos//cfdi:Traslados//cfdi:Traslado') as $Traslado){ 
-      echo "Traslado";
-      var_dump($Traslado) ;
-      /*
-      Impuesto = 002
-      Importe
-      */
+      $result['traslado'] = [
+        'Impuesto' => strval($Traslado['Impuesto']),
+        'Importe' => strval($Traslado['Importe'])
+      ];
     } 
+
+    return $result;
     
-    /* if(isset($ns['tfd']))
-    {
-      foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
-        echo "tfd";
-        var_dump($tfd);
-      } 
-    } */
+        /* if(isset($ns['tfd']))
+        {
+          foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
+            echo "tfd";
+            var_dump($tfd);
+          } 
+        } */
   }
 
   public static function importCfdiPago()
