@@ -78,6 +78,9 @@ class IngresosController extends Controllers
     $getById = new IngresosService;
     $ingreso = $getById->getId($id);
 
+    $getItemsByIdIngreso = new ServiceItemsService;
+    $items = $getItemsByIdIngreso->getByIdIngreso($id);
+
     require_once 'view/ingresos/update.php';
   }
 
@@ -171,7 +174,7 @@ class IngresosController extends Controllers
         $_SESSION['error'] = $respuesta;
         throw new Exception($respuesta);
       }else{
-
+        $idIngreso = $respuesta;
         //Crear los items
         foreach($result['concepto'] as $item)
         {
@@ -193,6 +196,6 @@ class IngresosController extends Controllers
       $_SESSION['error'] = $th->getMessage();
     }
 
-    header('Location:' . __URL__ . 'ingresos/create');
+    header('Location:' . __URL__ . 'ingresos/show' . $idIngreso);
   }
 }

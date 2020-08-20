@@ -79,5 +79,11 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </div>
+
+        <hr>
+
+        <p>Conceptos</p>
+
+        <?= var_dump($items) ?>
   </form>
 </div>

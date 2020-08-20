@@ -39,4 +39,26 @@ class ItemsService
       return $error->getMessage();
     }
   }
+
+  public function getByIdIngreso($id)
+  {
+    try {
+      if(!$id || $id < 0) throw new PDOException("El valor no es de tipo Integer");
+      $sql = $this->_db->prepare('SELECT * FROM items WHERE facturaid = :id');
+
+      $sql->execute(['id' => $id]);
+      $obj = $sql->fetchAll(PDO::FETCH_CLASS, '\\App\\Models\\Items');
+      $result = json_decode(json_encode($obj), true); 
+
+      if(count($result) == 0){
+        $result = [
+          'error' => 'no existe items'
+        ];
+      }
+
+      return $result;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
+  }
 } 
