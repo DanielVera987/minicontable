@@ -38,7 +38,7 @@ class Cfdi
     } 
 
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto') as $Concepto){ 
-      $result['concepto'] = [
+      $result['concepto'][] = [
         'Cantidad' => strval($Concepto['Cantidad']),
         'Descripcion' => strval($Concepto['Descripcion']),
         'ValorUnitario' => strval($Concepto['ValorUnitario']),

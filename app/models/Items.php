@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Items {
+class Items{
   public $id;
   public $facturaid;
   public $tipo;

@@ -3,10 +3,13 @@ namespace App\Controllers;
 
 use App\Models\Ingreso,
     App\Service\IngresosService,
+    App\Models\ItemsService,
     Helpers\Validator,
     Helpers\Controllers,
     Helpers\Cfdi,
     Exception;
+use App\Models\Items;
+use App\Service\ItemsService as ServiceItemsService;
 
 class IngresosController extends Controllers
 {
@@ -126,24 +129,33 @@ class IngresosController extends Controllers
     header("Location: " . __URL__ . "ingresos");
   }
 
+  public static function imp()
+  {
+    require 'view/ingresos/importar.php';
+  }
+
   public static function importar()
   {
     try {
+      $dir_subida = 'Assets/xml/';
+      $fichero_subido = $dir_subida . basename($_FILES['filexml']['name']);
+
+      move_uploaded_file($_FILES['filexml']['tmp_name'], $fichero_subido);
+
       self::auth();
-      $result = Cfdi::importCfdi3('file3.xml');
+      $result = Cfdi::importCfdi3($fichero_subido);
       $fecha = explode("T", $result['fecha']);
       
       $newIngreso = new Ingreso();
       $newIngreso->user_id = (isset($_SESSION['id'])) ? $_SESSION['id'] : false ;
       $newIngreso->fecha = $fecha[0];
       $newIngreso->cliente = $result['receptorNombre'];
-      $newIngreso->concepto = (int)intVal($result['concepto']['Importe']);
-      $newIngreso->importe = (int)intVal($result['concepto']['Importe']);
-      $newIngreso->iva = intVal($result['traslado']['Importe']);
+      $newIngreso->concepto = intVal($result['subtotal']);
+      $newIngreso->importe = intVal($result['total']);
+      $newIngreso->iva = 1;
       $newIngreso->iva_ret = 1;
       $newIngreso->isr_ret = 1;
       $newIngreso->neto = intVal($result['total']);
-      
 
       $validator = Validator::ValidatorIngresoCreate($newIngreso);
 
@@ -155,17 +167,30 @@ class IngresosController extends Controllers
       $crearIngreso = new IngresosService;
       $respuesta = $crearIngreso->create($newIngreso);
 
-      //Crear los items
-
       if(!is_numeric($respuesta)){
         $_SESSION['error'] = $respuesta;
         throw new Exception($respuesta);
       }else{
+
+        //Crear los items
+        foreach($result['concepto'] as $item)
+        {
+          $items = new Items;
+          $items->facturaid = $respuesta;
+          $items->tipo = 'I';
+          $items->cantidad = $item['Cantidad'];
+          $items->descripcion = $item['Descripcion'];
+          $items->valorUnitario = $item['ValorUnitario'];
+          $items->importe = $item['Importe'];
+          $createItem = new ServiceItemsService;
+          $respuesta = $createItem->create($items);
+        }
+
         $_SESSION['success'] = "Ingreso Creado";
       }
 
     } catch (Exception $th) {
-      //throw $th;
+      $_SESSION['error'] = $th->getMessage();
     }
 
     header('Location:' . __URL__ . 'ingresos/create');
