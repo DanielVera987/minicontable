@@ -1,7 +1,7 @@
 <br><br>
 <div class="container">
   <form action="<?= __URL__ ?>ingresos/update" method="POST">
-        <h1 class="h3 mb-3 font-weight-normal">Nuevo Ingreso</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Editar Ingreso</h1>
 
         <?php if(isset($_SESSION['error'])): ?> 
           <div class="alert alert-danger" role="alert">
@@ -74,16 +74,47 @@
           </div>
         </div>
       <?php endforeach; ?>
+      <?php foreach($items as $item): ?>
+        <hr>
+
+        <h4>Concepto</h4>
+        <input type="hidden" name="idItem[]" value="<?= $item['id'] ?>">
+
+        <div class="form-group row">
+          <label for="neto" class="col-md-1 col-form-label">Descripcion</label>
+          <div class="col-md-6">
+            <textarea class="form-control" name="desc[]" id="desc" placeholder="">
+              <?= $item['descripcion'] ?> 
+            </textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="neto" class="col-md-1 col-form-label">Cantidad</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" value="<?= $item['cantidad'] ?>" name="cantidad[]" id="cantidad" placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="neto" class="col-md-1 col-form-label">Valor Unitario</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" value="<?= $item['valorunitario'] ?>" name="valorunitario[]" id="valorunitario" placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="neto" class="col-md-1 col-form-label">Importe</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" value="<?= $item['importe'] ?>" name="importeitem[]" id="importe" placeholder="">
+          </div>
+        </div>
+
+      <?php endforeach; ?>
         <div class="form-group row">
           <div class="offset-md-1 col-sm-10">
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </div>
-
-        <hr>
-
-        <p>Conceptos</p>
-
-        <?= var_dump($items) ?>
   </form>
 </div>

@@ -39,6 +39,26 @@ class ItemsService
       return $error->getMessage();
     }
   }
+  public function update(Items $model)
+  {
+    try {
+      if(empty($model)) throw new PDOException("Verifique que sea de tipo Ingreso");
+      $sql = $this->_db->prepare('UPDATE items SET facturaid=:facturaid, cantidad=:cantidad, descripcion=:descripcion, valorunitario=:valorunitario, importe=:importe where id=:id');
+
+      $sql->execute([
+        'id' => $model->id,
+        'facturaid' => $model->facturaid,
+        'cantidad' => $model->cantidad,
+        'descripcion' => $model->descripcion ,
+        'valorunitario' => $model->valorUnitario,
+        'importe' => $model->importe,
+      ]);
+
+      return 1;
+    } catch (PDOException $error) {
+      return $error->getMessage();
+    }
+  }
 
   public function getByIdIngreso($id)
   {

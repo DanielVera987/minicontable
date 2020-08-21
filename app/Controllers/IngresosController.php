@@ -114,6 +114,20 @@ class IngresosController extends Controllers
         $_SESSION['error'] = $respuesta;
         throw new Exception($respuesta);
       }else{
+        $i = 0;
+        foreach($_POST['idItem'] as $item)
+        {
+          $updateItems = new Items;
+          $updateItems->id = $item[$i];
+          $updateItems->facturaid = $id;
+          $updateItems->descripcion = $_POST['desc'][$i];
+          $updateItems->cantidad = $_POST['cantidad'][$i];
+          $updateItems->valorUnitario = $_POST['valorunitario'][$i];
+          $updateItems->importe = $_POST['importeitem'][$i];
+          $upItem = new ServiceItemsService;
+          $upItem->update($updateItems);
+          $i++;
+        }
         $_SESSION['success'] = "Ingreso Creado";
       }
 
@@ -130,6 +144,24 @@ class IngresosController extends Controllers
     $ingreso = $getById->destroy($id);
     
     header("Location: " . __URL__ . "ingresos");
+  }
+
+  public static function ver()
+  {
+    self::auth();
+    $id = (isset($_GET['id'])) ? $_GET['id'] : 'fail' ;
+    if(!is_numeric($id)) {
+      header('Location: '. __URL__ . 'error');
+      exit;
+    }
+
+    $getById = new IngresosService;
+    $ingreso = $getById->getId($id);
+
+    $getItemsByIdIngreso = new ServiceItemsService;
+    $items = $getItemsByIdIngreso->getByIdIngreso($id);
+
+    require_once 'view/ingresos/ver.php';
   }
 
   public static function imp()
